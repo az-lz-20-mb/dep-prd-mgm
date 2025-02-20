@@ -1,9 +1,11 @@
+# Root management group details
 root_id   = "44a926b2-f8ee-464b-b28a-5e6124f2bb56"
 root_name = "Tenant Root Group"
 mg_prefix = "mg"
 default_location = "germanywestcentral"
 deploy_core_landing_zones = false
 
+# Landing zones configuration
 landing_zones = {
   "lz20" = {
     parent          = "root"
@@ -13,6 +15,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # Management group for security
   "mprod-security" = {
     parent          = "lz20"  
     archetype_id    = "mprod-security"
@@ -21,6 +24,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # Management group for mprod
   "mprod" = {
     parent          = "lz20"
     archetype_id    = "mprod-security"
@@ -29,6 +33,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # QUA environments & stages
   "qua" = {
     parent          = "mprod"
     archetype_id    = "mprod-security"
@@ -37,6 +42,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # PROD environments and stages
   "prd" = {
     parent          = "mprod"
     archetype_id    = "mprod-security"
@@ -45,6 +51,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # Decommissioned production group
   "mprod-decomissioned" = {
     parent          = "mprod"
     archetype_id    = "mprod-security"
@@ -53,6 +60,7 @@ landing_zones = {
     parameters      = {}
   }
 
+  # Shared production group - understood as CAF Platform equivalent
   "mprod-shared" = {
     parent          = "mprod"
     archetype_id    = "mprod-security"
@@ -61,7 +69,7 @@ landing_zones = {
     parameters      = {}
   }
 
-   # New groups under mg-mprod-shared
+  # New groups under mg-mprod-shared, following CAF Platform model
   "Identity" = {
     parent          = "mprod-shared"
     archetype_id    = "mprod-security"
@@ -88,6 +96,8 @@ landing_zones = {
     parameters      = {}
     display_name   = "Management"
   }
+
+  # QUA team-specific sub-groups
   "qua-avdtm" = {
     parent          = "qua"
     archetype_id    = "mprod-security"
@@ -148,11 +158,8 @@ landing_zones = {
     archetype_id    = "mprod-security"
     subscription_ids = []
   }
-  "prd" = {
-    parent          = "mprod"
-    archetype_id    = "mprod-security"
-    subscription_ids = []
-  }
+
+  # Production team-specific sub-groups
   "prd-avdtm" = {
     parent          = "prd"
     archetype_id    = "mprod-security"
@@ -218,6 +225,4 @@ landing_zones = {
     archetype_id    = "mprod-security"
     subscription_ids = []
   }
-
 }
-
