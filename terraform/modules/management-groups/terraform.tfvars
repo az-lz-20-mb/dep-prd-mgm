@@ -70,7 +70,7 @@ landing_zones = {
   }
 
   # New groups under mg-mprod-shared, following CAF Platform model
-  "Identity" = {
+  "identity" = {
     parent          = "mprod-shared"
     archetype_id    = "mprod-security"
     subscription_ids = []
@@ -79,7 +79,7 @@ landing_zones = {
     display_name   = "Identity"
   }
 
-  "Connectivity" = {
+  "connectivity" = {
     parent          = "mprod-shared"
     archetype_id    = "mprod-security"
     subscription_ids = []
@@ -88,7 +88,7 @@ landing_zones = {
     display_name   = "Connectivity"
   }
 
-  "Management" = {
+  "management" = {
     parent          = "mprod-shared"
     archetype_id    = "mprod-security"
     subscription_ids = []
