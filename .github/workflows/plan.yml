@@ -1,0 +1,23 @@
+name: Terraform Plan
+
+on:
+  workflow_dispatch:
+    inputs:
+      terraform_version:
+        description: "Version of Terraform"
+        required: true
+        default: "1.9.2"
+      terraform_directory:
+        description: "Path to Terraform code"
+        required: true
+        default: "terraform/modules/management-groups"
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Terraform Plan from Template
+        uses: MSH/tmp-sha-pip/.github/templates/plan-template.yaml@main
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
+          terraform_directory: ${{ inputs.terraform_directory }}
