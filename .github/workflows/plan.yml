@@ -9,7 +9,7 @@ jobs:
   terraform-plan:
     uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/plan-template.yml@main
     with:
-      terraform_directory: "terraform/modules/management-groups"
+      module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
     secrets:
       azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
