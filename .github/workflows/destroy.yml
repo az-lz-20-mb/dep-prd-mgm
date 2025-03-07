@@ -5,8 +5,7 @@ on:
 
 jobs:
   terraform-destroy:
-    runs-on: ubuntu-latest  # Requires manual approval
-    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/destroy-template.yml@main
+    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/destroy-template.yml@main  # Calls the reusable workflow
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
