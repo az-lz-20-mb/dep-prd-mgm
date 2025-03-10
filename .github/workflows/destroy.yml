@@ -3,7 +3,7 @@ name: Terraform Destroy
 on:
   workflow_dispatch: # Manual trigger only
 jobs:
-   # First job: Terraform Destroy
+   # First job: Terraform Destroysdf
   terraform-destroy:
     uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/destroy-template.yml@main 
     with:
