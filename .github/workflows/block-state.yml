@@ -1,40 +1,30 @@
-name: Block Terraform State
+name: Terraform Plan and Apply2
 
 on:
-  workflow_dispatch: # Manual trigger only
+  push
 
 jobs:
-  terraform-block:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  # First job: Terraform Plan
+  terraform-plan:
+    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/plan-template.yml@main
+    with:
+      module_directory: "terraform/modules/management-groups"
+      terraform_version: '1.9.2'
+    secrets:
+      azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      azure_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: '1.9.2'
-
-      - name: Terraform Init
-        run: |
-          az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
-          az account set --subscription $ARM_SUBSCRIPTION_ID
-          terraform init
-        working-directory: "terraform/modules/management-groups"
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Terraform Apply (Intentional Block)
-        run: |
-          terraform apply -auto-approve &
-          sleep 10
-          pkill -f "terraform apply"
-        working-directory: "terraform/modules/management-groups"
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  # Second job: Terraform Apply
+  terraform-apply:
+    needs: terraform-plan  # Ensures that apply only runs after plan succeeds
+    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/apply-template.yml@main
+    with:
+      module_directory: "terraform/modules/management-groups"
+      terraform_version: '1.9.2'
+    secrets:
+      azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+      azure_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
