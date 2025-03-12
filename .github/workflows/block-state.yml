@@ -1,4 +1,4 @@
-name: Block Terraform State
+name: Block Terraform State Lock
 
 on:
   workflow_dispatch: # Manual trigger only
