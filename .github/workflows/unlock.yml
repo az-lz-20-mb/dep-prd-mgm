@@ -1,7 +1,7 @@
 name: Terraform State Management
 
 on:
-  push:
+  workflow_dispatch: # Manual trigger only
 
 jobs:
   # First job: List Terraform State
