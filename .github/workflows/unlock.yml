@@ -1,4 +1,4 @@
-name: Terraform State Management
+name: Terraform Unlock 
 
 on:
   workflow_dispatch: # Manual trigger only
