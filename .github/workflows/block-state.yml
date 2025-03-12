@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  # First job: Terraform Plan
+  # First job: Terraform Plan 
   terraform-plan:
     uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/plan-template.yml@main
     with:
