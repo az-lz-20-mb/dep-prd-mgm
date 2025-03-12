@@ -10,7 +10,7 @@ jobs:
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
-      lock_id: "LOCK_ID_PLACEHOLDER" # This should be provided when calling the workflow
+      lock_id: "bf1b1be7-8298-4faf-bb9d-92f3bfa07999" # This should be provided when calling the workflow
     secrets:
       azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
       azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
