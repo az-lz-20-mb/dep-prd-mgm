@@ -6,7 +6,7 @@ on:
 jobs:
   # First job: Terraform Plan 
   terraform-plan:
-    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/plan-template.yml@main
+    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/plan-template2.yml@main
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
