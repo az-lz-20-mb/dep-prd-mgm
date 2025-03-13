@@ -1,7 +1,12 @@
-name: Terraform Unlock
+name: Terraform Unlock State
 
 on:
-  workflow_dispatch: # Manual trigger only
+  workflow_dispatch:
+    inputs:
+      lock_id:
+        description: "Enter Terraform Lock ID"
+        required: true
+        type: string
 
 jobs:
   terraform-unlock:
@@ -10,7 +15,7 @@ jobs:
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
-      lock_id: "LOCK_ID_PLACEHOLDER" # This should be provided when calling the workflow
+      lock_id: "${{ inputs.lock_id }}"
     secrets:
       azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
       azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
