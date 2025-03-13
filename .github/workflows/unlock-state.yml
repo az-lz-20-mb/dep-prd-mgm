@@ -15,7 +15,7 @@ jobs:
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
-      lock_id: "${{ inputs.lock_id }}" # Pobiera wartość wpisaną przez użytkownika
+      lock_id: "${{ inputs.lock_id }}"
     secrets:
       azure_client_id: ${{ secrets.AZURE_CLIENT_ID }}
       azure_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
