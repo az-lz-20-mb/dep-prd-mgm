@@ -1,4 +1,4 @@
-name: Terraform Unlock State
+name: Terraform State Unlock
 
 on:
   workflow_dispatch:
@@ -9,9 +9,8 @@ on:
         type: string
 
 jobs:
-  terraform-unlock:
-    name: 'Unlock Terraform State'
-    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/unlock-template.yml@main
+  terraform-state-unlock:
+    uses: az-lz-20-mb/tmp-sha-pip/.github/workflows/state-unlock-template.yml@main
     with:
       module_directory: "terraform/modules/management-groups"
       terraform_version: '1.9.2'
